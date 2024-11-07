@@ -17,7 +17,16 @@
     <form action="@yield('form-action')" method="POST">
         @csrf
         @yield('form-method')
-
+        <p>Technologies:</p>
+        <div class="mb-3">
+        @foreach($technologies as $technology)
+            <input type="checkbox" name="technologies[]" value="{{ $technology->id }}"
+            @if (in_array($technology->id, old('technologies', $project->technologies->pluck('id')->toArray())))
+                checked
+            @endif>
+            <label class="me-2">{{ $technology->name }}</label>
+        @endforeach
+        </div>
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $project->name) }}">
@@ -26,7 +35,10 @@
             <label for="type_id" class="form-label">Type</label>
             <select name="type_id" id="type_id" class="form-control">
                 @foreach ($types as $type)
-                <option value="{{ $type->id }}">
+                <option value="{{ $type->id }}"
+                    @if (old('type_id', $project->type_id) == $type->id)
+                    selected
+                    @endif>
                     {{ $type->name }}
                 </option>
                 @endforeach
