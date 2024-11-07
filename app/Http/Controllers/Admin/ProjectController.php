@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAndUpdateProjectRequest;
 
@@ -25,7 +26,8 @@ class ProjectController extends Controller
     {
         $project = new Project();
         $types = Type::all();
-        return view('admin.projects.create', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -35,6 +37,7 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validated();
         $project = Project::create($validatedData);
+        $project->technologies()->sync($validatedData['technologies']);
         return redirect()->route('admin.projects.show', $project->id );
     }
 
@@ -52,7 +55,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -62,6 +66,7 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validated();
         $project->update($validatedData);
+        $project->technologies()->sync($validatedData['technologies']);
         return redirect()->route('admin.projects.show', $project->id);
     }
 
