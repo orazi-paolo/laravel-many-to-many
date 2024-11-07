@@ -9,6 +9,8 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Url</th>
+                <th>Technologies</th>
+                <th>Type</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -19,6 +21,12 @@
                 <td>{{ $project->name }}</td>
                 <td>{{ $project->description }}</td>
                 <td>{{ $project->url }}</td>
+                <td>
+                    @foreach($project->technologies as $technology)
+                    <span class="badge bg-primary">{{ $technology->name }}</span>
+                    @endforeach
+                </td>
+                <td>{{ $project->type->name }}</td>
                 <td>
                     <a href="{{ route('guest.projects.show', $project->id )}}" class="btn btn-primary btn-sm">Show</a>
                 </td>

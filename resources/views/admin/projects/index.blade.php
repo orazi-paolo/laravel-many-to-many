@@ -10,6 +10,8 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Url</th>
+                <th>Technologies</th>
+                <th>Type</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -21,12 +23,18 @@
                 <td>{{ $project->description }}</td>
                 <td>{{ $project->url }}</td>
                 <td>
-                    <a href="{{ route('admin.projects.show', $project->id )}}" class="btn btn-primary btn-sm">Show</a>
-                    <a href="{{ route('admin.projects.edit', $project->id )}}" class="btn btn-warning btn-sm">Edit</a>
+                    @foreach($project->technologies as $technology)
+                        <span class="badge bg-primary">{{ $technology->name }}</span>
+                    @endforeach
+                </td>
+                <td>{{ $project->type->name }}</td>
+                <td>
+                    <a href="{{ route('admin.projects.show', $project->id )}}" class="btn btn-primary btn-sm mb-1">Show</a>
+                    <a href="{{ route('admin.projects.edit', $project->id )}}" class="btn btn-warning btn-sm mb-1">Edit</a>
                     <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm delete-button"
+                        <button type="submit" class="btn btn-danger btn-sm delete-button mb-1"
                             data-project-name="{{ $project->name }}">Delete</button>
                     </form>
                 </td>
