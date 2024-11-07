@@ -6,6 +6,7 @@ use App\Http\Controllers\Guest\TypeController as GuestTypeController;
 use App\Http\Controllers\Admin\TypeController as AdminTypeController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
+use App\Http\Controllers\Guest\TechnologyController as GuestTechnologyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::get('/', [GuestProjectController::class, 'index']);
 Route::name('guest.')->group(function () {
     Route::resource('projects', GuestProjectController::class)->only(['index', 'show']);
     Route::resource('types', GuestTypeController::class)->only(['index', 'show']);
+    Route::resource('technologies', GuestTechnologyController::class)->only(['index', 'show']);
 });
 
 
