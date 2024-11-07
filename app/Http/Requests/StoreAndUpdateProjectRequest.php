@@ -25,7 +25,8 @@ class StoreAndUpdateProjectRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'url' => 'required|url',
-            'type_id' => 'required|numeric|exists:types,id'
+            'type_id' => 'required|numeric|exists:types,id',
+            'technologies' => 'required|array|exists:technologies,id'
         ];
     }
 
@@ -41,8 +42,10 @@ class StoreAndUpdateProjectRequest extends FormRequest
             'url.url' => 'Il campo "url" deve contenere un URL valido',
             'type_id.required' => 'Il tipo di progetto è obbligatorio',
             'type_id.numeric' => 'Il tipo di progetto deve essere un numero',
-            'type_id.exists' => 'Il tipo di progetto selezionato non esiste'
-
+            'type_id.exists' => 'Il tipo di progetto selezionato non esiste',
+            'technologies.required' => 'Almeno una tecnologia è obbligatoria',
+            'technologies.array' => 'Vi è un errore nella gestione delle tecnologie risolveremo a breve, si prega di segnalare il problema (non sapevo cosa scrivere haha)',
+            'technologies.exists' => 'Una delle tecnologie selezionate non esiste'
         ];
     }
 }
