@@ -9,6 +9,12 @@
             <h2> {{ $project->name }} </h2>
         </div>
         <div class="card-body">
+            <p>
+                <strong>Technologies: </strong>
+                @foreach ($project->technologies as $technology)
+                <span class="badge text-bg-primary"> {{ $technology->name }} </span>
+                @endforeach
+            </p>
             <p><strong>ID:</strong> {{ $project->id }}</p>
             <p><strong>Name:</strong> {{ $project->name }}</p>
             <p><strong>Type:</strong> {{ $project->type->name }}</p>
