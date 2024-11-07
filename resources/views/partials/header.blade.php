@@ -31,6 +31,13 @@
                         <a class="nav-link" href="{{ route('guest.types.index') }}">Types</a>
                     @endauth
                 </li>
+                <li>
+                    @auth
+                    <a class="nav-link" href="{{ route('admin.technologies.index') }}">Technologies</a>
+                    @else
+                    <a class="nav-link" href="{{ route('guest.technologies.index') }}">Technologies</a>
+                    @endauth
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
